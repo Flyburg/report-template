@@ -1,0 +1,82 @@
+%%%%%%%%%%%%%% DOCUMENT CLASS & PACKAGES %%%%%%%%%%%%%%
+\documentclass{ctexart}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{geometry}
+\usepackage{minted}
+\usemintedstyle[verilog]{xcode}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage[hidelinks, bookmarksnumbered=false]{hyperref}
+\usepackage{bookmark}
+\usepackage[normalem]{ulem}
+\usepackage{paralist}
+\usepackage{subcaption}
+
+%%%%%%%%%%%%%% STYLE SETTINGS %%%%%%%%%%%%%%
+% 字体设置
+\setCJKfamilyfont{hwzs}{STZhongsong}
+\setmonofont{Menlo}
+
+% 代码样式设置
+\setminted{fontfamily=tt,frame=single,fontsize=\small,framesep=4mm,baselinestretch=1.2,linenos,breaklines}
+
+% 页面布局
+\geometry{a4paper,left=1in,right=1in,top=1.3in,bottom=1.3in}
+\setstretch{1.5}
+
+%%%%%%%%%%%%%% TITLE PAGE INFO %%%%%%%%%%%%%%
+
+% 生成封面页命令
+\newcommand{\maketitlepage}{
+\begin{spacing}{1.2}
+\begin{titlepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.3\textwidth]{./zjulogo.png}
+    \end{figure}
+    \vspace{20ex}
+    \begin{center}
+    \Huge {\CJKfamily{hwzs}\reporttitle} \\ [1ex]
+    \Large {\CJKfamily{hwzs}\reportsubtitle} \\ [24ex]
+
+    \begin{tabularx}{0.6\textwidth}{@{}lX@{}}
+        \Large \textit{姓名：} & \Large \textit{\underline{\makebox[\linewidth][c]{\authorname}}} \\ [1ex]
+        \Large \textit{学号：} & \Large \textit{\underline{\makebox[\linewidth][c]{\studentid}}} \\ [1ex]
+        \Large \textit{邮箱：} & \Large \textit{\underline{\makebox[\linewidth][c]{\authoremail}}} \\ [1ex]
+        \Large \textit{教师：} & \Large \textit{\underline{\makebox[\linewidth][c]{\teachername}}} \\ [1ex]
+        \Large \textit{助教：} & \Large \textit{\underline{\makebox[\linewidth][c]{\assistantnames}}} \\ [1ex]
+        \Large \textit{日期：} & \Large \textit{\underline{\makebox[\linewidth][c]{\today}}}
+    \end{tabularx}
+    \end{center}
+\end{titlepage}
+\end{spacing}
+}
+
+%%%%%%%%%%%%%% SECTION FORMATTING %%%%%%%%%%%%%%
+% 设置计数器格式
+\renewcommand{\thesection}{\chinese{section}}
+\renewcommand{\thesubsection}{\chinese{subsection}、}
+
+% 定义实验标题格式
+\newcommand{\LabName}[1]{
+    {\centering
+    \section*{#1}
+    \par}
+    \addcontentsline{toc}{section}{#1}
+    \markboth{#1}{#1}
+}
+
+% 定义小节标题格式
+\newcommand{\LabSection}[1]{
+    \stepcounter{subsection}
+    \subsection*{\thesubsection #1}
+    \addcontentsline{toc}{subsection}{\thesubsection #1}
+}
+
+% 设置section样式
+\CTEXsetup[format={\Large\bfseries\centering}]{section}
