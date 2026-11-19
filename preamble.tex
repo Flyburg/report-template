@@ -3,23 +3,27 @@
 \usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage{geometry}
-\usepackage{minted}
+\usepackage{minted} % v3 需配套 Python 端 latexminted（TeX Live 2026 的 sty 3.7 对应 latexminted 0.6.0）
 \usemintedstyle[verilog]{xcode}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{fontspec}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{tabularx}
-\usepackage{lmodern}
+\usepackage{booktabs}
 \usepackage{setspace}
 \usepackage[hidelinks, bookmarksnumbered=false]{hyperref}
 \usepackage{bookmark}
 \usepackage[normalem]{ulem}
 \usepackage{paralist}
 \usepackage{subcaption}
+\captionsetup[sub]{subrefformat=subparens}
+\usepackage[backend=biber,style=gb7714-2015]{biblatex}
+\addbibresource{refs.bib}
 
 %%%%%%%%%%%%%% STYLE SETTINGS %%%%%%%%%%%%%%
-% 字体设置
-\setCJKfamilyfont{hwzs}{STZhongsong}
+% 字体设置（macOS 无华文中宋，以宋体粗体近似；如安装了 STZhongsong 可改回）
+\setCJKfamilyfont{hwzs}{Songti SC Bold}
 \setmonofont{Menlo}
 
 % 代码样式设置
@@ -58,25 +62,17 @@
 }
 
 %%%%%%%%%%%%%% SECTION FORMATTING %%%%%%%%%%%%%%
-% 设置计数器格式
-\renewcommand{\thesection}{\chinese{section}}
-\renewcommand{\thesubsection}{\chinese{subsection}、}
-
-% 定义实验标题格式
-\newcommand{\LabName}[1]{
-    {\centering
-    \section*{#1}
-    \par}
-    \addcontentsline{toc}{section}{#1}
-    \markboth{#1}{#1}
+% 实验标题：不编号、居中大号黑体；自动写入目录并设置页眉
+% 小节标题：中文编号加顿号（一、二、……），编号与标题间不留空
+\ctexset{
+  section = {
+    numbering = false,
+    format    = \Large\bfseries\centering,
+  },
+  subsection = {
+    number    = \chinese{subsection},
+    name      = {,、},
+    aftername = {},
+    tocline   = {\CTEXthesubsection#2},
+  },
 }
-
-% 定义小节标题格式
-\newcommand{\LabSection}[1]{
-    \stepcounter{subsection}
-    \subsection*{\thesubsection #1}
-    \addcontentsline{toc}{subsection}{\thesubsection #1}
-}
-
-% 设置section样式
-\CTEXsetup[format={\Large\bfseries\centering}]{section}
